@@ -1,45 +1,40 @@
-import React from 'react';
-import './App.css';
-import Navbar from './Navbar';
-import Header from './Header';
-import ProjectSection from './ProjectSection';
-import ProjectCard from './ProjectCard';
-import AboutSection from './AboutSection';
-import TeamMember from './TeamMember';
-import ContactSection from './ContactSection';
-import LocationImage from './LocationImage';
-import Footer from './Footer';
+import React, { useState } from 'react';
 
 function App() {
+  const [width, setWidth] = useState(0);
+  const [height, setHeight] = useState(0);
+  const [boxStyle, setBoxStyle] = useState({ width: 0, height: 0 });
+
+  const handleWidthChange = (event) => {
+    setWidth(event.target.value);
+  };
+
+  const handleHeightChange = (event) => {
+    setHeight(event.target.value);
+  };
+
+  const handleCalculateClick = () => {
+    setBoxStyle({ width: width + 'px', height: height + 'px', border: '1px solid black' });
+  };
+
   return (
-    <div>
-      <Navbar />
-      <Header />
-      <div className="w3-content w3-padding" style={{ maxWidth: '1564px' }}>
-        <ProjectSection />
-        <div className="w3-row-padding">
-          <ProjectCard title="Summer House" imageSrc="house5.jpg" />
-          <ProjectCard title="Brick House" imageSrc="house2.jpg" />
-          <ProjectCard title="Renovated" imageSrc="house3.jpg" />
-          <ProjectCard title="Barn House" imageSrc="house4.jpg" />
+    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', flexDirection: 'column' }}>
+      <div>
+        <div>
+          <label>Width:</label>
+          <input type="number" onChange={handleWidthChange} />
         </div>
-        <div className="w3-row-padding">
-          <ProjectCard title="Summer House" imageSrc="house2.jpg" />
-          <ProjectCard title="Brick House" imageSrc="house5.jpg" />
-          <ProjectCard title="Renovated" imageSrc="house4.jpg" />
-          <ProjectCard title="Barn House" imageSrc="house3.jpg" />
+        <div>
+          <label>Height:</label>
+          <input type="number" onChange={handleHeightChange} />
         </div>
-        <AboutSection />
-        <div className="w3-row-padding w3-grayscale">
-          <TeamMember name="John Doe" role="CEO & Founder" imageSrc="team2.jpg" />
-          <TeamMember name="Jane Doe" role="Architect" imageSrc="team1.jpg" />
-          <TeamMember name="Mike Ross" role="Architect" imageSrc="team3.jpg" />
-          <TeamMember name="Dan Star" role="Architect" imageSrc="team4.jpg" />
+        <div>
+          <button onClick={handleCalculateClick}>Calculate</button>
         </div>
-        <ContactSection />
-        <LocationImage />
       </div>
-      <Footer />
+      <div style={{ ...boxStyle }}>
+       
+      </div>
     </div>
   );
 }
